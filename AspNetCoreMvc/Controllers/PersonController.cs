@@ -22,5 +22,10 @@ namespace AspNetCoreMvc.Controllers
 
            return View(people);
        } 
+
+       public IActionResult Edit()
+       {
+           return View();
+       }
     }
 }
