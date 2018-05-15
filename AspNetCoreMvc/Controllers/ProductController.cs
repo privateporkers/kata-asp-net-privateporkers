@@ -29,8 +29,8 @@ namespace AspNetCoreMvc.Controllers
         public ActionResult Details(int id)
 
         {
-
-        return View();
+            var getProduct = _prodRepo.GetProduct(id);
+            return View(getProduct);
 
         }
 
@@ -39,9 +39,8 @@ namespace AspNetCoreMvc.Controllers
         public ActionResult Create()
 
         {
-
+           
             return View();
-
         }
 
         // POST: Product/Create
@@ -56,6 +55,9 @@ namespace AspNetCoreMvc.Controllers
             try
             {
                 // TODO: Add insert logic here
+                var prod = new Product();
+                prod.Name = collection["Name"];
+               _prodRepo.AddProduct(prod);
                 return RedirectToAction(nameof(Index));
             }
 
