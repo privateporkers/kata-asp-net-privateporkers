@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data;
 using Dapper;
+using System.Threading.Tasks;
 
 namespace Itb.Repositories
 {
@@ -43,13 +44,13 @@ namespace Itb.Repositories
            }
        }
 
-       public IEnumerable<Product> GetProducts()
+       public Task<IEnumerable<Product>> GetProducts()
        {
            using (var conn = _conn)
            {
                conn.Open();
                
-               return conn.Query<Product>("SELECT *, ProductId as Id FROM product");
+               return conn.QueryAsync<Product>("SELECT *, ProductId as Id FROM product");
            }
        }
 
