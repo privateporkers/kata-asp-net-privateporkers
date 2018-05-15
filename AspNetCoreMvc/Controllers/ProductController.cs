@@ -102,7 +102,8 @@ namespace AspNetCoreMvc.Controllers
 
         public ActionResult Delete(int id)
         {
-            return View();
+            var getProd = _prodRepo.GetProduct(id);
+            return View(getProd);
         }
 
         // POST: Product/Delete/5
@@ -116,6 +117,7 @@ namespace AspNetCoreMvc.Controllers
             try
             {
                 // TODO: Add delete logic here
+                var delete = _prodRepo.DeleteProduct(id);
                 return RedirectToAction(nameof(Index));
             }
 
