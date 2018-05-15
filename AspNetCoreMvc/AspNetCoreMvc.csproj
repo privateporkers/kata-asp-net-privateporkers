@@ -17,6 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Itb.Repositories\Itb.Repositories.csproj" />
+    <ProjectReference Include="..\Itb.Shared\Itb.Shared.csproj" />
     <ProjectReference Include="Itb.Shared\Itb.Shared.csproj" />
     <ProjectReference Include="Itb.Repositories\Itb.Repositories.csproj" />
   </ItemGroup>
