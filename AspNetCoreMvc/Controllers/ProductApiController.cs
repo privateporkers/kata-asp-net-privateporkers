@@ -9,7 +9,7 @@ using Itb.Shared;
 namespace AspNetCoreMvc.Controllers
 {
     [Produces("application/json")]
-    [Route("api/ProductApi")]
+    [Route("api/product")]
     public class ProductApiController : Controller
     {
         private readonly IProductRepository _prodRepo;
@@ -30,7 +30,8 @@ namespace AspNetCoreMvc.Controllers
         [HttpGet("{id}", Name = "Get")]
         public Product Get(int id)
         {
-            return _prodRepo.GetProduct(id);
+            var getProduct = _prodRepo.GetProduct(id);
+            return getProduct;
         }
         
         // POST: api/ProductApi

@@ -36,7 +36,7 @@ namespace AspNetCoreMvc.Controllers
 
     // GET: Product/Create
 
-        public ActionResult Create()
+        public ActionResult  Create()
 
         {
            
@@ -49,7 +49,7 @@ namespace AspNetCoreMvc.Controllers
 
         [ValidateAntiForgeryToken]
 
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(IFormCollection collection)
         {
 
             try
@@ -57,7 +57,7 @@ namespace AspNetCoreMvc.Controllers
                 // TODO: Add insert logic here
                 var prod = new Product();
                 prod.Name = collection["Name"];
-               _prodRepo.AddProduct(prod);
+               await _prodRepo.AddProduct(prod);
                 return RedirectToAction(nameof(Index));
             }
 
@@ -81,14 +81,14 @@ namespace AspNetCoreMvc.Controllers
         [HttpPost]
 
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, IFormCollection collection)
         {
             try
             {
 
                 // TODO: Add update logic here
                 var prod = new Product() { Id = id, Name = collection["Name"]};
-                _prodRepo.UpdateProduct(prod);
+                await _prodRepo.UpdateProduct(prod);
                 return RedirectToAction(nameof(Index));
 
             }
@@ -102,7 +102,7 @@ namespace AspNetCoreMvc.Controllers
 
         // GET: Product/Delete/5
 
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             var getProd = _prodRepo.GetProduct(id);
             return View(getProd);
@@ -114,12 +114,12 @@ namespace AspNetCoreMvc.Controllers
 
         [ValidateAntiForgeryToken]
 
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id, IFormCollection collection)
         {
             try
             {
                 // TODO: Add delete logic here
-                var delete = _prodRepo.DeleteProduct(id);
+                var delete = await _prodRepo.DeleteProduct(id);
                 return RedirectToAction(nameof(Index));
             }
 

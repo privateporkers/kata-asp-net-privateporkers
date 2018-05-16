@@ -8,8 +8,8 @@ namespace Itb.Shared
     {
         Task<IEnumerable<Product>> GetProducts();
         Product GetProduct(int id);
-        int DeleteProduct(int id);
-        int UpdateProduct(Product prod);
-        int AddProduct(Product prod);
+        Task<int> DeleteProduct(int id);
+        Task<int> UpdateProduct(Product prod);
+        Task<int> AddProduct(Product prod);
     }
 }

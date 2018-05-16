@@ -17,21 +17,21 @@ namespace Itb.Repositories
            _conn = conn;
        }
 
-       public int AddProduct(Product prod)
+       public Task<int> AddProduct(Product prod)
        {
            using (var conn = _conn)
            {
                conn.Open();
-               return conn.Execute("INSERT INTO product (Name) VALUES (@Name)", prod);
+               return conn.ExecuteAsync("INSERT INTO product (Name) VALUES (@Name)", prod);
            }
        } 
 
-       public int DeleteProduct(int id)
+       public Task<int> DeleteProduct(int id)
        {
            using (var conn = _conn)
            {
                conn.Open();
-               return conn.Execute("DELETE FROM product WHERE ProductId = @Id", new { id } );
+               return conn.ExecuteAsync("DELETE FROM product WHERE ProductId = @Id", new { id } );
            }
        }
 
@@ -41,7 +41,7 @@ namespace Itb.Repositories
            {
                conn.Open();
                return conn.Query<Product>("SELECT *, ProductId as Id FROM product WHERE ProductId = @Id", new {id}).FirstOrDefault();
-           }
+            }
        }
 
        public Task<IEnumerable<Product>> GetProducts()
@@ -54,12 +54,12 @@ namespace Itb.Repositories
            }
        }
 
-       public int UpdateProduct(Product prod)
+       public Task<int> UpdateProduct(Product prod)
        {
           using (var conn = _conn)
            {
                conn.Open();
-               return conn.Execute("UPDATE product set Name = @Name WHERE ProductId = @Id", prod);
+               return conn.ExecuteAsync("UPDATE product set Name = @Name WHERE ProductId = @Id", prod);
            } 
        }
     }
