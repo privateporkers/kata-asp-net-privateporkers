@@ -28,12 +28,12 @@ namespace AspNetCoreMvc.Controllers
 
         // GET: api/ProductApi/5
         [HttpGet("{id}", Name = "Get")]
-        public Product Get(int id)
+        public async Task<Product> Get(int id)
         {
-            var getProduct = _prodRepo.GetProduct(id);
+            var getProduct = await _prodRepo.GetProduct(id);
             return getProduct;
         }
-        
+
         // POST: api/ProductApi
         [HttpPost]
         public void Post([FromBody]string value)
@@ -41,7 +41,7 @@ namespace AspNetCoreMvc.Controllers
             var prod = new Product() { Name = value };
             _prodRepo.AddProduct(prod);
         }
-        
+
         // PUT: api/ProductApi/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
@@ -49,7 +49,7 @@ namespace AspNetCoreMvc.Controllers
             var prod = new Product() { Name = value, Id = id };
             _prodRepo.UpdateProduct(prod);
         }
-        
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)

@@ -12,12 +12,12 @@ namespace AspNetCoreMvc.Controllers
        {
            var people = new List<Person>
            {
-           new Person() {Name = "David"},
-           new Person() {Name = "John"},
-           new Person() {Name = "Dylan"},
-           new Person() {Name = "Daniel"},
-           new Person() {Name = "Brandon"},
-           new Person() {Name = "Cody"},
+               new Person {Name = "David"},
+               new Person {Name = "John"},
+               new Person {Name = "Dylan"},
+               new Person {Name = "Daniel"},
+               new Person {Name = "Brandon"},
+               new Person {Name = "Cody"},
            };
 
            return View(people);

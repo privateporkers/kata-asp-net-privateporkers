@@ -24,22 +24,20 @@ namespace AspNetCoreMvc.Controllers
             return View(productCollect);
         }
 
-    // GET: Product/Details/5
+        // GET: Product/Details/5
 
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
 
         {
-            var getProduct = _prodRepo.GetProduct(id);
+            var getProduct = await _prodRepo.GetProduct(id);
             return View(getProduct);
-
         }
 
-    // GET: Product/Create
+        // GET: Product/Create
 
-        public ActionResult  Create()
+        public ActionResult Create()
 
         {
-           
             return View();
         }
 
@@ -51,21 +49,18 @@ namespace AspNetCoreMvc.Controllers
 
         public async Task<ActionResult> Create(IFormCollection collection)
         {
-
             try
             {
                 // TODO: Add insert logic here
                 var prod = new Product();
                 prod.Name = collection["Name"];
-               await _prodRepo.AddProduct(prod);
+                await _prodRepo.AddProduct(prod);
                 return RedirectToAction(nameof(Index));
             }
 
             catch
             {
-
                 return View();
-
             }
         }
 
@@ -85,24 +80,20 @@ namespace AspNetCoreMvc.Controllers
         {
             try
             {
-
                 // TODO: Add update logic here
-                var prod = new Product() { Id = id, Name = collection["Name"]};
+                var prod = new Product() { Id = id, Name = collection["Name"] };
                 await _prodRepo.UpdateProduct(prod);
                 return RedirectToAction(nameof(Index));
-
             }
-
             catch
             {
                 return View();
             }
-
         }
 
         // GET: Product/Delete/5
 
-        public async Task<ActionResult> Delete(int id)
+        public ActionResult Delete(int id)
         {
             var getProd = _prodRepo.GetProduct(id);
             return View(getProd);
